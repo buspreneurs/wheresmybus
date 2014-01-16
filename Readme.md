@@ -7,12 +7,12 @@ en route.
 
 Planned and implemented functionality
 
-* [ ] API endpoint for the [BusDroid][busdroid] tracker app (mandatory)
-* [ ] Proxy incoming location information from app to database (mandatory)
-* [ ] Manage (create/revoke) auth tokens for logging app (mandatory)
-* [ ] Testing interface (see incoming location data real time) (optional)
-* [ ] Manage location information in the database (e.g purge test data) (optional)
-* [ ] Magage (create/delete) busses, in addition to other such services within the platform (optional)
+- [ ] API endpoint for the [BusDroid][busdroid] tracker app (mandatory)
+- [ ] Proxy incoming location information from app to database (mandatory)
+- [ ] Manage (create/revoke) auth tokens for logging app (mandatory)
+- [ ] Testing interface (see incoming location data real time) (optional)
+- [ ] Manage location information in the database (e.g purge test data) (optional)
+- [ ] Magage (create/delete) busses, in addition to other such services within the platform (optional)
 
 # License
 
