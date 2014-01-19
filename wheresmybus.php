@@ -10,6 +10,41 @@
  */
 
 
+/* API endpoint */
+add_action( 'init', 'add_endpoint');
+
+function add_endpoint() {
+  add_rewrite_endpoint( 'tracker', EP_ROOT );
+}
+
+add_action( 'template_redirect', 'template_redirect' );
+function template_redirect() {
+  global $wp_query;
+
+  if(!isset( $wp_query->query['tracker'] )) {
+    return $templates;
+  }
+
+  $out = [ "error" => False ];
+  switch (get_query_var('tracker')) {
+  case 'config':
+    $out['config'] = True;
+    break;
+  case 'location':
+    $out['location'] = True;
+    break;
+  default:
+    $out['error'] = True;
+    break;
+  }
+  echo json_encode($out);
+
+}
+
+/************/
+
+
+/* Admin interface */
 add_action( 'admin_menu', 'wheresmybus_menu' );
 
 function wheresmybus_menu() {
