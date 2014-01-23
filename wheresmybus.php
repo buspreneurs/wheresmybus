@@ -25,10 +25,10 @@ function template_redirect() {
     return $templates;
   }
 
-  $out = [ "error" => False ];
+  $out = [];
   switch (get_query_var('tracker')) {
   case 'config':
-    $out['config'] = True;
+    $out = create_config();
     break;
   case 'location':
     $out['location'] = True;
@@ -37,8 +37,33 @@ function template_redirect() {
     $out['error'] = True;
     break;
   }
+  header('Content-Type: application/json; charset=UTF-8');
   echo json_encode($out);
+}
 
+/**
+ * Create configuration to return over the API,
+ *  that the bus tracker app can use
+ */
+function create_config() {
+  global $post;
+  $args = array(
+		'post_type' => 'gavern_buses',
+		'post_status' => 'publish'
+		);
+  $query = new WP_Query( $args );
+  $out = array( 'endpoint' => get_bloginfo('url').'/tracker/location/' );
+  $buses = [];
+  while ( $query->have_posts() ) {
+    $query->the_post();
+    $bus = array("name"=>$post->post_title,"id"=>$post->ID);
+    $buses[] = $bus;
+  }
+  $out["buses"] = $buses;
+
+  wp_reset_postdata();
+
+  return $out;
 }
 
 /************/
