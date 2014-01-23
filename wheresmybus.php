@@ -25,7 +25,7 @@ function template_redirect() {
     return $templates;
   }
 
-  $out = [];
+  $out = array();
   switch (get_query_var('tracker')) {
   case 'config':
     $out = create_config();
@@ -53,7 +53,7 @@ function create_config() {
 		);
   $query = new WP_Query( $args );
   $out = array( 'endpoint' => get_bloginfo('url').'/tracker/location/' );
-  $buses = [];
+  $buses = array();
   while ( $query->have_posts() ) {
     $query->the_post();
     $bus = array("name"=>$post->post_title,"id"=>$post->ID);
